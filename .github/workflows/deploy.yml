@@ -24,7 +24,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-role: ${{ env.AWS_ROLE }}
+          role-to-assume: ${{ env.AWS_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
 
       # Step 2: Log in to Amazon ECR
@@ -79,7 +79,7 @@ jobs:
       - name: Configure AWS Credentials with Role
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-role: ${{ env.AWS_ROLE }}
+          role-to-assume: ${{ env.AWS_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Set up SSH key
