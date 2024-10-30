@@ -60,10 +60,12 @@ jobs:
 
       # Step 5: Initialize Terraform
       - name: Terraform Init
+        working-directory: ./env/dev 
         run: terraform init
 
       # Step 6: Terraform Apply to deploy infrastructure
       - name: Terraform Apply
+        working-directory: ./env/dev
         env:
           EC2_PUBLIC_KEY: ${{ secrets.EC2_PUBLIC_KEY }} 
         run: terraform apply -auto-approve -var="public_key=${EC2_PUBLIC_KEY}"
