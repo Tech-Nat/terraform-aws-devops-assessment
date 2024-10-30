@@ -14,7 +14,7 @@ resource "aws_db_instance" "main" {
   storage_type           = "gp2"
   engine                 = var.db_engine
   instance_class         = var.db_instance_class
-  name                   = var.db_name
+  db_name                = var.db_name
   username               = var.db_username
   password               = var.db_password
   db_subnet_group_name   = aws_db_subnet_group.main.name
