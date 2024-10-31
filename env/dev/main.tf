@@ -5,6 +5,7 @@ module "vpc" {
     public_subnet_cidr = var.public_subnet_cidr
     private_subnet_cidr = var.private_subnet_cidr
 }
+
 # Security Groups Module
 module "security_groups" {
   source           = "../../modules/security_groups"
@@ -32,7 +33,7 @@ module "rds" {
   security_group_id    = module.security_groups.rds_sg_id
   db_username          = var.db_username
   db_password          = var.db_password
-  db_instance_class    = "db.t3.micro"  # Cost-effective instance type for RDS
+  db_instance_class    = var.db_instance_class 
   db_engine            = var.db_engine
   db_allocated_storage = 20             # Minimum storage allocation (in GB)
   db_name              = var.db_name
