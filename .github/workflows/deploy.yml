@@ -12,6 +12,9 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-to-aws-main  # Unique group name to prevent concurrent runs
+      cancel-in-progress: true
 
     outputs:
       ec2_ip: ${{ steps.get_ec2_ip.outputs.EC2_PUBLIC_IP }}
@@ -81,7 +84,11 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
-    environment: dev  
+    environment: dev
+    concurrency:
+      group: deploy-to-aws-main  # Same group as above to avoid conflicts
+      cancel-in-progress: true
+        
     steps:
       - name: Configure AWS Credentials with Access Keys
         uses: aws-actions/configure-aws-credentials@v2
