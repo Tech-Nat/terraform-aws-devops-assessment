@@ -71,7 +71,7 @@ jobs:
         working-directory: ./env/dev
         env:
           EC2_PUBLIC_KEY: ${{ secrets.EC2_PUBLIC_KEY }} 
-        run: terraform apply -auto-approve -var="public_key=${EC2_PUBLIC_KEY}"
+        run: terraform apply -auto-approve -lock=false -var="public_key=${EC2_PUBLIC_KEY}"
 
       # Step 7: Capture EC2 IP from Terraform Output
       - name: Get EC2 Public IP
@@ -88,7 +88,7 @@ jobs:
     concurrency:
       group: deploy-to-aws-main  # Same group as above to avoid conflicts
       cancel-in-progress: true
-        
+
     steps:
       - name: Configure AWS Credentials with Access Keys
         uses: aws-actions/configure-aws-credentials@v2
