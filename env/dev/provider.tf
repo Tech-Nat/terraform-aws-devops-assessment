@@ -23,5 +23,6 @@ terraform {
     key = "terraform/devops-assessment-medici/dev/terraform.tfstate"
     region = "us-east-1"
     dynamodb_table = "nat-github-terraform-aws-tfstate-lock"
+    profile = "vscode_user"
   }   
 }
